@@ -9,7 +9,7 @@ url = "http://s4dev.betradar.com/gismo.php?"
 plimit = 95
 output_file = open('bets', 'w')
 countries = {'Romania':{}, 'Argentina':{}, 'Rusia':{}, 'Poland':{}, 'Portugal': {}, 'Latvia': {}, 'Lithuania': {}, 'Spain': {},
-             'Chile': {}, 'Austria': {}}
+             'Chile': {}, 'Austria': {}, 'Italy': {}, 'Turkey': {}}
 countries['Romania']['Liga I'] = {'11/12': urllib.urlencode(dict (html=1,
                                                 id=1827,
                                                 language="en",
@@ -269,6 +269,58 @@ countries['Austria']['Bundesliga'] = {'11/12': urllib.urlencode(dict (html=1,
                                           )
                 }
 
+countries['Italy']['Serie A'] = {'11/12': urllib.urlencode(dict (html=1,
+                                                id=1827,
+                                                language="en",
+                                                clientid=4,
+                                                state="2_1,3_31,22_1,5_3639,9_fixtures,231_full,23_1",
+                                                callback="21bcfc25d0677d2ee486016b577f179c101a3fda"
+                                               )
+                                          ),
+                '12/13': urllib.urlencode(dict (html=1,
+                                                id=1827,
+                                                language="en",
+                                                clientid=4,
+                                                state="2_1,3_31,22_1,5_5145,9_fixtures,231_full,23_1",
+                                                callback="c10fce44e3fe5c3983bcd059fb660f848222e089"
+                                               )
+                                          ),
+                '13/14': urllib.urlencode(dict (html=1,
+                                                id=1827,
+                                                language="en",
+                                                clientid=4,
+                                                state="2_1,3_31,22_1,5_6797,9_fixtures,231_full,23_1",
+                                                callback="762c9cbec6692d8617ed5d764320a16dabfd1457"
+                                               )
+                                          )
+                }
+
+countries['Turkey']['Super Lig'] = {'11/12': urllib.urlencode(dict (html=1,
+                                                id=1827,
+                                                language="en",
+                                                clientid=4,
+                                                state="2_1,3_46,22_1,5_3831,9_fixtures,231_full,23_1",
+                                                callback="eba40a67824ad1cf71ce6b197afb1fc7976d1c3c"
+                                               )
+                                          ),
+                '12/13': urllib.urlencode(dict (html=1,
+                                                id=1827,
+                                                language="en",
+                                                clientid=4,
+                                                state="2_1,3_46,22_1,5_4993,9_fixtures,231_full,23_1",
+                                                callback="3cf3c35f695b34da35d0c952fc7d7d5cedf22afc"
+                                               )
+                                          ),
+                '13/14': urllib.urlencode(dict (html=1,
+                                                id=1827,
+                                                language="en",
+                                                clientid=4,
+                                                state="2_1,3_46,22_1,5_6673,9_fixtures,231_full,23_1",
+                                                callback="fb1f0fe1f75674e506220d6c0c969cb2bc600746"
+                                               )
+                                          )
+                }
+
 for country, value in countries.items():
     print country
     output_file.write(country + '\n')
@@ -418,7 +470,7 @@ for country, value in countries.items():
                 if (not printed_header):
                     output_file.write('\tH/T events :\n')
                     printed_header = True
-                    output_file.write('\t\t{0}  probability: {1:.2f}%\n'.format(key, half_time[key]['prob']))
+                output_file.write('\t\t{0}  probability: {1:.2f}%\n'.format(key, half_time[key]['prob']))
 
 
         #Computing full_time probability
@@ -432,7 +484,7 @@ for country, value in countries.items():
                 if (not printed_header):
                     output_file.write('\tFT events :\n')
                     printed_header = True
-                    output_file.write('\t\t{0}  probability: {1:.2f}%\n'.format(key, full_time[key]['prob']))
+                output_file.write('\t\t{0}  probability: {1:.2f}%\n'.format(key, full_time[key]['prob']))
 
         #Computing half_full_time probability
 
@@ -445,7 +497,7 @@ for country, value in countries.items():
                 if (not printed_header):
                     output_file.write('\tHalf/Full time events :\n')
                     printed_header = True
-                    output_file.write ('\t\t{0}  probability: {1:.2f}%\n'.format(key, half_full_time[key]['prob']))
+                output_file.write ('\t\t{0}  probability: {1:.2f}% last_matches# {2}\n'.format(key, half_full_time[key]['prob'], half_full_time[key]['#_of_fixt_since_last']))
 
         #Computing exact_goals probability
 
@@ -458,7 +510,7 @@ for country, value in countries.items():
                 if (not printed_header):
                     output_file.write('\tExact Goal events :\n')
                     printed_header = True
-                    output_file.write ('\t\t{0}  probability: {1:.2f}%\n'.format(key, exact_goals[key]['prob']))
+                output_file.write ('\t\t{0}  probability: {1:.2f}%\n'.format(key, exact_goals[key]['prob']))
 
         #Computing over_goals probability
 
@@ -471,7 +523,7 @@ for country, value in countries.items():
                 if (not printed_header):
                     output_file.write('\tOver X goals events :\n')
                     printed_header = True
-                    output_file.write('\t\t{0}  probability: {1:.2f}%\n'.format(key, over_goals[key]['prob']))
+                output_file.write('\t\t{0}  probability: {1:.2f}%\n'.format(key, over_goals[key]['prob']))
 
 
         #Computing correct_score probability
@@ -485,5 +537,5 @@ for country, value in countries.items():
                 if (not printed_header):
                     output_file.write('\tCorrect score events:\n')
                     printed_header = True
-                    output_file.write('\t\t{0}  probability: {1:.2f}%\n'.format(key, correct_score[key]['prob']))
+                output_file.write('\t\t{0}  probability: {1:.2f}%\n'.format(key, correct_score[key]['prob']))
 output_file.close()
