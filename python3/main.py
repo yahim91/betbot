@@ -529,7 +529,7 @@ countries['Costa Rica']['Primera Division'] = {'11': urlencode(dict (html=1,
                 }
 
 for country, value in countries.items():
-    print country
+    print (country)
     output_file.write(country + '\n')
     for competition, queries in value.items():
         output_file.write(competition + '\n')
@@ -557,7 +557,7 @@ for country, value in countries.items():
         total_fixtures = 0
         for year, query in OrderedDict(sorted(queries.items(), key=lambda t: t[0])).items():
             data = urllib2.urlopen(url + query)
-            print 'Gathered data for ' + year
+            print ('Gathered data for ' + year)
             root = etree.XML(data.read())
             tree = etree.ElementTree(root)
             raw_fixtures = root.findall(".//n[@c='couch_fixtures']/c")[0].text
