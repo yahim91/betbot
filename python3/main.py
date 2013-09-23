@@ -529,12 +529,12 @@ countries['Costa Rica']['Primera Division'] = {'11': urlencode(dict (html=1,
                 }
 
 for country, value in countries.items():
-    print (country)
+    print country
     output_file.write(country + '\n')
     for competition, queries in value.items():
         output_file.write(competition + '\n')
         exact_goals = dict()
-        over_goals = {'3.5': {'amount': 0, 'value': 3.5}}
+        over_goals = {'2.5': {'amount': 0, 'value': 2.5}, '3.5': {'amount': 0, 'value': 3.5}, '4.5': {'amount': 0, 'value': 4.5}}
         half_time = {'home wins': {'amount':0},
                     'draws': {'amount': 0},
                     'away wins': {'amount': 0}}
@@ -556,8 +556,8 @@ for country, value in countries.items():
         correct_score = {}
         total_fixtures = 0
         for year, query in OrderedDict(sorted(queries.items(), key=lambda t: t[0])).items():
-            data = urlopen(url + query)
-            print ('Gathered data for ' + year)
+            data = urllib2.urlopen(url + query)
+            print 'Gathered data for ' + year
             root = etree.XML(data.read())
             tree = etree.ElementTree(root)
             raw_fixtures = root.findall(".//n[@c='couch_fixtures']/c")[0].text
@@ -590,6 +590,8 @@ for country, value in countries.items():
                 #Computing final result
                 space = result.text.find(':')
                 after_penalty = result.text.find('(AP)')
+                if(after_penalty == -1):
+                    after_penalty = result.text.find('(OT)')
                 full_time_home_goals = int(result.text[:space])
                 if (after_penalty != -1):
                     full_time_away_goals = int(result.text[space + 1:after_penalty])
