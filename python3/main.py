@@ -556,7 +556,7 @@ for country, value in countries.items():
         correct_score = {}
         total_fixtures = 0
         for year, query in OrderedDict(sorted(queries.items(), key=lambda t: t[0])).items():
-            data = urllib2.urlopen(url + query)
+            data = urlopen(url + query)
             print ('Gathered data for ' + year)
             root = etree.XML(data.read())
             tree = etree.ElementTree(root)
