@@ -9,7 +9,160 @@ url = "http://s4dev.betradar.com/gismo.php?"
 plimit = 95
 output_file = open('bets', 'w')
 countries = {'Romania':{}, 'Argentina':{}, 'Rusia':{}, 'Poland':{}, 'Portugal': {}, 'Latvia': {}, 'Lithuania': {}, 'Spain': {},
-             'Chile': {}, 'Austria': {}, 'Italy': {}, 'Turkey': {}}
+             'Chile': {}, 'Austria': {}, 'Italy': {}, 'Turkey': {}, 'Costa Rica': {}, 'Colombia': {}, 'USA': {}, 'U.A.E.': {},
+             'Switzerland': {}, 'Bulgaria': {}, 'Denmark': {}}
+
+countries['Denmark']['Superligaen'] = {'11/12': urllib.urlencode(dict (html=1,
+                                                id=1827,
+                                                language="en",
+                                                clientid=4,
+                                                state="2_1,3_8,22_1,5_3376,9_fixtures,231_full,23_1",
+                                                callback="23789ea295988edf6c38dee0719dcb8ecf55a484"
+                                               )
+                                          ),
+                '12/13': urllib.urlencode(dict (html=1,
+                                                id=1827,
+                                                language="en",
+                                                clientid=4,
+                                                state="2_1,3_8,22_1,5_4660,9_fixtures,231_full,23_1",
+                                                callback="10ab1e6f05d28176b63acd4446a10901f0aa419d"
+                                               )
+                                          ),
+                '13/14': urllib.urlencode(dict (html=1,
+                                                id=1827,
+                                                language="en",
+                                                clientid=4,
+                                                state="2_1,3_8,22_1,5_6203,9_fixtures,231_full,23_1",
+                                                callback="88963d3e98997e7c38a0a60cf39644d2264fb27e"
+                                               )
+                                          )
+                }
+
+countries['Bulgaria']['A PFG'] = {'11/12': urllib.urlencode(dict (html=1,
+                                                id=1827,
+                                                language="en",
+                                                clientid=4,
+                                                state="2_1,3_78,22_1,5_3472,9_fixtures,231_full,23_1",
+                                                callback="8aff0f4f2dd21f2e6fbadcd30d98687744d0f38d"
+                                               )
+                                          ),
+                '12/13': urllib.urlencode(dict (html=1,
+                                                id=1827,
+                                                language="en",
+                                                clientid=4,
+                                                state="2_1,3_78,22_1,5_5029,9_fixtures,231_full,23_1",
+                                                callback="2d45f8d0d5cc637dc754bfbb97e1e131a4a8dc92"
+                                               )
+                                          ),
+                '13/14': urllib.urlencode(dict (html=1,
+                                                id=1827,
+                                                language="en",
+                                                clientid=4,
+                                                state="2_1,3_78,22_1,5_6279,9_fixtures,231_full,23_1",
+                                                callback="3eb343fb39bf4a99f4ca6c843eca3b29fda3c484"
+                                               )
+                                          )
+                }
+countries['Switzerland']['Super League'] = {'11/12': urllib.urlencode(dict (html=1,
+                                                id=1827,
+                                                language="en",
+                                                clientid=4,
+                                                state="2_1,3_25,22_1,5_3388,9_fixtures,231_full,23_1",
+                                                callback="651876027b0763dcfb3b8616f81e16ea3e321d50"
+                                               )
+                                          ),
+                '12/13': urllib.urlencode(dict (html=1,
+                                                id=1827,
+                                                language="en",
+                                                clientid=4,
+                                                state="2_1,3_25,22_1,5_4702,9_fixtures,231_full,23_1",
+                                                callback="651876027b0763dcfb3b8616f81e16ea3e321d50"
+                                               )
+                                          ),
+                '13/14': urllib.urlencode(dict (html=1,
+                                                id=1827,
+                                                language="en",
+                                                clientid=4,
+                                                state="2_1,3_25,22_1,5_6285,9_fixtures,231_full,23_1",
+                                                callback="646e6395789ba8a9365f58cece9a013ddc3a923a"
+                                               )
+                                          )
+                }
+countries['U.A.E.']['Arabian Gulf League'] = {'11/12': urllib.urlencode(dict (html=1,
+                                                id=1827,
+                                                language="en",
+                                                clientid=4,
+                                                state="2_1,3_299,22_5,5_4007,9_fixtures,231_full,23_1",
+                                                callback="c29b06eb80edd3b5b769dea2252fbfc50dfce0e1"
+                                               )
+                                          ),
+                '12/13': urllib.urlencode(dict (html=1,
+                                                id=1827,
+                                                language="en",
+                                                clientid=4,
+                                                state="2_1,3_299,22_5,5_5501,9_fixtures,231_full,23_1",
+                                                callback="3dfef7e812c59342730f5f18420873e308f7aa1d"
+                                               )
+                                          ),
+                '13/14': urllib.urlencode(dict (html=1,
+                                                id=1827,
+                                                language="en",
+                                                clientid=4,
+                                                state="2_1,3_299,22_5,5_6985,9_fixtures,231_full,23_1",
+                                                callback="2e66d8c0095f440cc090f8f9e2ebdf5147dfa780"
+                                               )
+                                          )
+                }
+countries['USA']['MLS'] = {'11': urllib.urlencode(dict (html=1,
+                                                id=1827,
+                                                language="en",
+                                                clientid=4,
+                                                state="2_1,3_26,22_2,5_3263,9_fixtures,231_full,23_2",
+                                                callback="52f9bff95beca7167ebccaf37c21bee541038a71"
+                                               )
+                                          ),
+                '12': urllib.urlencode(dict (html=1,
+                                                id=1827,
+                                                language="en",
+                                                clientid=4,
+                                                state="2_1,3_26,22_2,5_4262,9_fixtures,231_full,23_2",
+                                                callback="af2c457ab98f70052069be46d7418e1082150150"
+                                               )
+                                          ),
+                '13': urllib.urlencode(dict (html=1,
+                                                id=1827,
+                                                language="en",
+                                                clientid=4,
+                                                state="2_1,3_26,22_2,5_5790,9_fixtures,231_full,23_2",
+                                                callback="9da4e02e3e986ffe490f6067c650775981b130aa"
+                                               )
+                                          )
+                }
+countries['Colombia']['Liga Postobon'] = {'12': urllib.urlencode(dict (html=1,
+                                                id=1827,
+                                                language="en",
+                                                clientid=4,
+                                                state="2_1,3_274,22_3,5_5095,9_fixtures,231_full,23_1",
+                                                callback="12b1072c39113f6a81d27d4170b42ab98c1dfdcb"
+                                               )
+                                          ),
+                '13': urllib.urlencode(dict (html=1,
+                                                id=1827,
+                                                language="en",
+                                                clientid=4,
+                                                state="2_1,3_274,22_3,5_5914,9_fixtures,231_full,23_1",
+                                                callback="f5a1b0dd5fa372c86c63287add170629ea852b37"
+                                               )
+                                          ),
+                '13-2': urllib.urlencode(dict (html=1,
+                                                id=1827,
+                                                language="en",
+                                                clientid=4,
+                                                state="2_1,3_274,22_3,5_6665,9_fixtures,231_full,23_1",
+                                                callback="6c83c58b22240d20b17de2ec29d1cec0959f73cb"
+                                               )
+                                          )
+                }
 countries['Romania']['Liga I'] = {'11/12': urllib.urlencode(dict (html=1,
                                                 id=1827,
                                                 language="en",
@@ -61,6 +214,33 @@ countries['Argentina']['Primera Division'] = {'11/12': urllib.urlencode(dict (ht
                                                )
                                           )
                 }
+
+countries['Argentina']['Primera B Nacional'] = {'11/12': urllib.urlencode(dict (html=1,
+                                                id=1827,
+                                                language="en",
+                                                clientid=4,
+                                                state="2_1,3_48,22_3,5_3635,9_fixtures,231_full,23_1",
+                                                callback="7a2630d4aa8a037d619c5f76715e1e6a094819d4"
+                                               )
+                                          ),
+                '12/13': urllib.urlencode(dict (html=1,
+                                                id=1827,
+                                                language="en",
+                                                clientid=4,
+                                                state="2_1,3_48,22_3,5_5097,9_fixtures,231_full,23_1",
+                                                callback="6fa1108ba300fad5b00dddbb55082570bbca2d03"
+                                               )
+                                          ),
+                '13/14': urllib.urlencode(dict (html=1,
+                                                id=1827,
+                                                language="en",
+                                                clientid=4,
+                                                state="2_1,3_48,22_3,5_6459,9_fixtures,231_full,23_1",
+                                                callback="43dde24a7800f732f16fe9e9d39497a7141787b6"
+                                               )
+                                          )
+                }
+
 countries['Rusia']['Premier League'] = {'11/12': urllib.urlencode(dict (html=1,
                                                 id=1827,
                                                 language="en",
@@ -321,13 +501,39 @@ countries['Turkey']['Super Lig'] = {'11/12': urllib.urlencode(dict (html=1,
                                           )
                 }
 
+countries['Costa Rica']['Primera Division'] = {'11': urllib.urlencode(dict (html=1,
+                                                id=1827,
+                                                language="en",
+                                                clientid=4,
+                                                state="2_1,3_289,22_2,5_3558,9_fixtures,231_full,23_1",
+                                                callback="34f2507bfea8f4d17593e6bab35522e60b427d3c"
+                                               )
+                                          ),
+                '12/13': urllib.urlencode(dict (html=1,
+                                                id=1827,
+                                                language="en",
+                                                clientid=4,
+                                                state="2_1,3_289,22_2,5_4995,9_fixtures,231_full,23_1",
+                                                callback="0b775a181a97e3ae0dde8c02bcafad537b3c064a"
+                                               )
+                                          ),
+                '13/14': urllib.urlencode(dict (html=1,
+                                                id=1827,
+                                                language="en",
+                                                clientid=4,
+                                                state="2_1,3_289,22_2,5_6549,9_fixtures,231_full,23_1",
+                                                callback="d6defb2d3c5edbfa41b2e18d39ed029e47499d65"
+                                               )
+                                          )
+                }
+
 for country, value in countries.items():
     print country
     output_file.write(country + '\n')
     for competition, queries in value.items():
         output_file.write(competition + '\n')
         exact_goals = dict()
-        over_goals = {'3.5': {'amount': 0, 'value': 3.5}}
+        over_goals = {'2.5': {'amount': 0, 'value': 2.5}, '3.5': {'amount': 0, 'value': 3.5}, '4.5': {'amount': 0, 'value': 4.5}}
         half_time = {'home wins': {'amount':0},
                     'draws': {'amount': 0},
                     'away wins': {'amount': 0}}
@@ -383,6 +589,8 @@ for country, value in countries.items():
                 #Computing final result
                 space = result.text.find(':')
                 after_penalty = result.text.find('(AP)')
+                if(after_penalty == -1):
+                    after_penalty = result.text.find('(OT)')
                 full_time_home_goals = int(result.text[:space])
                 if (after_penalty != -1):
                     full_time_away_goals = int(result.text[space + 1:after_penalty])
