@@ -533,24 +533,26 @@ for country, value in countries.items():
     for competition, queries in value.items():
         output_file.write(competition + '\n')
         exact_goals = dict()
-        over_goals = {'2.5': {'amount': 0, 'value': 2.5}, '3.5': {'amount': 0, 'value': 3.5}, '4.5': {'amount': 0, 'value': 4.5}}
-        half_time = {'home wins': {'amount':0},
-                    'draws': {'amount': 0},
-                    'away wins': {'amount': 0}}
+        over_goals = {'2.5': {'amount': 0, 'value': 2.5, 'last_occurence': 0, 'max_interval': 0},
+                      '3.5': {'amount': 0, 'value': 3.5, 'last_occurence': 0, 'max_interval': 0},
+                      '4.5': {'amount': 0, 'value': 4.5, 'last_occurence': 0, 'max_interval': 0}}
+        half_time = {'home wins': {'amount':0, 'last_occurence': 0, 'max_interval': 0},
+                     'draws': {'amount': 0,'last_occurence': 0, 'max_interval': 0},
+                     'away wins': {'amount': 0, 'last_occurence': 0, 'max_interval': 0}}
 
-        full_time = {'home wins': {'amount':0},
-                    'draws': {'amount': 0},
-                    'away wins': {'amount': 0}}
+        full_time = {'home wins': {'amount':0, 'last_occurence': 0, 'max_interval': 0},
+                     'draws': {'amount': 0, 'last_occurence': 0, 'max_interval': 0},
+                     'away wins': {'amount': 0, 'last_occurence': 0, 'max_interval': 0}}
 
-        half_full_time = {'1-1':{'amount': 0},
-                        '1-X':{'amount': 0},
-                        '1-2':{'amount': 0},
-                        'X-X':{'amount': 0},
-                        'X-1':{'amount': 0},
-                        'X-2':{'amount': 0},
-                        '2-2':{'amount': 0},
-                        '2-X':{'amount': 0},
-                        '2-1':{'amount': 0}}
+        half_full_time = {'1-1':{'amount': 0, 'last_occurence': 0, 'max_interval': 0},
+                        '1-X':{'amount': 0, 'last_occurence': 0, 'max_interval': 0},
+                        '1-2':{'amount': 0, 'last_occurence': 0, 'max_interval': 0},
+                        'X-X':{'amount': 0, 'last_occurence': 0, 'max_interval': 0},
+                        'X-1':{'amount': 0, 'last_occurence': 0, 'max_interval': 0},
+                        'X-2':{'amount': 0, 'last_occurence': 0, 'max_interval': 0},
+                        '2-2':{'amount': 0, 'last_occurence': 0, 'max_interval': 0},
+                        '2-X':{'amount': 0, 'last_occurence': 0, 'max_interval': 0},
+                        '2-1':{'amount': 0, 'last_occurence': 0, 'max_interval': 0}}
 
         correct_score = {}
         total_fixtures = 0
@@ -577,12 +579,21 @@ for country, value in countries.items():
                     #Computing half_time stats
                     if (half_time_home_goals > half_time_away_goals):
                         half_time['home wins']['amount'] += 1
+                        interval = total_fixtures - half_time['home wins']['last_occurence']
+                        if (interval > half_time['home wins']['max_interval']):
+                            half_time['home wins']['max_interval'] = interval
                         half_time['home wins']['last_occurence'] = total_fixtures
                     elif (half_time_home_goals == half_time_away_goals):
                         half_time['draws']['amount'] += 1
+                        interval = total_fixtures - half_time['draws']['last_occurence']
+                        if (interval > half_time['draws']['max_interval']):
+                            half_time['draws']['max_interval'] = interval
                         half_time['draws']['last_occurence'] = total_fixtures
                     else:
                         half_time['away wins']['amount'] += 1
+                        interval = total_fixtures - half_time['away wins']['last_occurence']
+                        if (interval > half_time['away wins']['max_interval']):
+                            half_time['away wins']['max_interval'] = interval
                         half_time['away wins']['last_occurence'] = total_fixtures
 
 
@@ -600,61 +611,103 @@ for country, value in countries.items():
 
                 #Computing full_time stats
                 if (full_time_home_goals > full_time_away_goals):
+                    interval = total_fixtures - full_time['home wins']['last_occurence']
+                    if (interval > full_time['home wins']['max_interval']):
+                        full_time['home wins']['max_interval'] = interval
                     full_time['home wins']['amount'] += 1
                     full_time['home wins']['last_occurence'] = total_fixtures
 
                     #Computing half_full_time stats
                     if (half_time_home_goals > half_time_away_goals):
+                        interval = total_fixtures - half_full_time['1-1']['last_occurence']
+                        if (interval > half_full_time['1-1']['max_interval']):
+                            half_full_time['1-1']['max_interval'] = interval
                         half_full_time['1-1']['amount'] += 1
                         half_full_time['1-1']['last_occurence'] = total_fixtures
                     elif (half_time_home_goals == half_time_away_goals):
+                        interval = total_fixtures - half_full_time['X-1']['last_occurence']
+                        if (interval > half_full_time['X-1']['max_interval']):
+                            half_full_time['X-1']['max_interval'] = interval
                         half_full_time['X-1']['amount'] += 1
                         half_full_time['X-1']['last_occurence'] = total_fixtures
                     else:
+                        interval = total_fixtures - half_full_time['2-1']['last_occurence']
+                        if (interval > half_full_time['2-1']['max_interval']):
+                            half_full_time['2-1']['max_interval'] = interval
                         half_full_time['2-1']['amount'] += 1
                         half_full_time['2-1']['last_occurence'] = total_fixtures
 
                 elif (full_time_home_goals == full_time_away_goals):
+                    interval = total_fixtures - full_time['draws']['last_occurence']
+                    if (interval > full_time['draws']['max_interval']):
+                        full_time['draws']['max_interval'] = interval
                     full_time['draws']['amount'] += 1
                     full_time['draws']['last_occurence'] = total_fixtures
 
                     #Computing half_full_time stats
                     if (half_time_home_goals > half_time_away_goals):
+                        interval = total_fixtures - half_full_time['1-X']['last_occurence']
+                        if (interval > half_full_time['1-X']['max_interval']):
+                            half_full_time['1-X']['max_interval'] = interval
                         half_full_time['1-X']['amount'] += 1
                         half_full_time['1-X']['last_occurence'] = total_fixtures
                     elif (half_time_home_goals == half_time_away_goals):
+                        interval = total_fixtures - half_full_time['X-X']['last_occurence']
+                        if (interval > half_full_time['X-X']['max_interval']):
+                            half_full_time['X-X']['max_interval'] = interval
                         half_full_time['X-X']['amount'] += 1
                         half_full_time['X-X']['last_occurence'] = total_fixtures
                     else:
+                        interval = total_fixtures - half_full_time['2-X']['last_occurence']
+                        if (interval > half_full_time['2-X']['max_interval']):
+                            half_full_time['2-X']['max_interval'] = interval
                         half_full_time['2-X']['amount'] += 1
                         half_full_time['2-X']['last_occurence'] = total_fixtures
 
                 else:
+                    interval = total_fixtures - full_time['away wins']['last_occurence']
+                    if (interval > full_time['away wins']['max_interval']):
+                        full_time['away wins']['max_interval'] = interval
                     full_time['away wins']['amount'] += 1
                     full_time['away wins']['last_occurence'] = total_fixtures
 
                     #Computing half_full_time stats
                     if (half_time_home_goals > half_time_away_goals):
+                        interval = total_fixtures - half_full_time['1-2']['last_occurence']
+                        if (interval > half_full_time['1-2']['max_interval']):
+                            half_full_time['1-2']['max_interval'] = interval
                         half_full_time['1-2']['amount'] += 1
                         half_full_time['1-2']['last_occurence'] = total_fixtures
                     elif (half_time_home_goals == half_time_away_goals):
+                        interval = total_fixtures - half_full_time['X-2']['last_occurence']
+                        if (interval > half_full_time['X-2']['max_interval']):
+                            half_full_time['X-2']['max_interval'] = interval
                         half_full_time['X-2']['amount'] += 1
                         half_full_time['X-2']['last_occurence'] = total_fixtures
                     else:
+                        interval = total_fixtures - half_full_time['2-2']['last_occurence']
+                        if (interval > half_full_time['2-2']['max_interval']):
+                            half_full_time['2-2']['max_interval'] = interval
                         half_full_time['2-2']['amount'] += 1
                         half_full_time['2-2']['last_occurence'] = total_fixtures
 
 
                 # Computing exact_goals stats
                 if (goals not in exact_goals):
-                    exact_goals[goals] = {'amount': 1, 'last_occurence': total_fixtures}
+                    exact_goals[goals] = {'amount': 1, 'last_occurence': total_fixtures, 'max_interval': 0}
                 else:
+                    interval = total_fixtures - exact_goals[goals]['last_occurence']
+                    if (interval > exact_goals[goals]['max_interval']):
+                        exact_goals[goals]['max_interval'] = interval
                     exact_goals[goals]['amount'] += 1
                     exact_goals[goals]['last_occurence'] = total_fixtures
 
                 #Computing over ? goals stats
                 for key, value in over_goals.items():
                     if (value['value'] < goals):
+                        interval = total_fixtures - over_goals[key]['last_occurence']
+                        if (interval > over_goals[key]['max_interval']):
+                            over_goals[key]['max_interval'] = interval
                         over_goals[key]['amount'] += 1
                         over_goals[key]['last_occurence'] = total_fixtures
 
@@ -662,8 +715,11 @@ for country, value in countries.items():
 
                 score = repr(full_time_home_goals) + '-' + repr(full_time_away_goals)
                 if (score not in correct_score):
-                    correct_score[score] = {'amount': 1, 'last_occurence': total_fixtures}
+                    correct_score[score] = {'amount': 1, 'last_occurence': total_fixtures, 'max_interval': 0}
                 else:
+                    interval = total_fixtures - correct_score[score]['last_occurence']
+                    if (interval > correct_score[score]['max_interval']):
+                        correct_score[score]['max_interval'] = interval
                     correct_score[score]['amount'] += 1
                     correct_score[score]['last_occurence'] = total_fixtures
 
@@ -678,7 +734,10 @@ for country, value in countries.items():
                 if (not printed_header):
                     output_file.write('\tH/T events :\n')
                     printed_header = True
-                output_file.write('\t\t{0}  probability: {1:.2f}%\n'.format(key, half_time[key]['prob']))
+                    output_file.write('\t\t{0}  probability: {1:.2f}% last_matches# {2} max interval: {3}\n'.format(key,
+                                                                                              half_time[key]['prob'],
+                                                                                              half_time[key]['#_of_fixt_since_last'],
+                                                                                              half_time[key]['max_interval']))
 
 
         #Computing full_time probability
@@ -692,7 +751,10 @@ for country, value in countries.items():
                 if (not printed_header):
                     output_file.write('\tFT events :\n')
                     printed_header = True
-                output_file.write('\t\t{0}  probability: {1:.2f}%\n'.format(key, full_time[key]['prob']))
+                output_file.write('\t\t{0}  probability: {1:.2f}% last_matches# {2} max interval: {3}\n'.format(key,
+                                                                                              full_time[key]['prob'],
+                                                                                              full_time[key]['#_of_fixt_since_last'],
+                                                                                              full_time[key]['max_interval']))
 
         #Computing half_full_time probability
 
@@ -705,7 +767,10 @@ for country, value in countries.items():
                 if (not printed_header):
                     output_file.write('\tHalf/Full time events :\n')
                     printed_header = True
-                output_file.write ('\t\t{0}  probability: {1:.2f}% last_matches# {2}\n'.format(key, half_full_time[key]['prob'], half_full_time[key]['#_of_fixt_since_last']))
+                output_file.write ('\t\t{0}  probability: {1:.2f}% last_matches# {2} max interval: {3}\n'.format(key,
+                                                                                               half_full_time[key]['prob'],
+                                                                                               half_full_time[key]['#_of_fixt_since_last'],
+                                                                                               half_full_time[key]['max_interval']))
 
         #Computing exact_goals probability
 
@@ -718,7 +783,10 @@ for country, value in countries.items():
                 if (not printed_header):
                     output_file.write('\tExact Goal events :\n')
                     printed_header = True
-                output_file.write ('\t\t{0}  probability: {1:.2f}%\n'.format(key, exact_goals[key]['prob']))
+                output_file.write ('\t\t{0}  probability: {1:.2f}% last_matches# {2} max interval: {3}\n'.format(key,
+                                                                                               exact_goals[key]['prob'],
+                                                                                               exact_goals[key]['#_of_fixt_since_last'],
+                                                                                               exact_goals[key]['max_interval']))
 
         #Computing over_goals probability
 
@@ -731,7 +799,10 @@ for country, value in countries.items():
                 if (not printed_header):
                     output_file.write('\tOver X goals events :\n')
                     printed_header = True
-                output_file.write('\t\t{0}  probability: {1:.2f}%\n'.format(key, over_goals[key]['prob']))
+                output_file.write('\t\t{0}  probability: {1:.2f}% last_matches# {2} max interval: {3}\n'.format(key,
+                                                                                              over_goals[key]['prob'],
+                                                                                              over_goals[key]['#_of_fixt_since_last'],
+                                                                                              over_goals[key]['max_interval']))
 
 
         #Computing correct_score probability
@@ -745,5 +816,8 @@ for country, value in countries.items():
                 if (not printed_header):
                     output_file.write('\tCorrect score events:\n')
                     printed_header = True
-                output_file.write('\t\t{0}  probability: {1:.2f}%\n'.format(key, correct_score[key]['prob']))
+                output_file.write('\t\t{0}  probability: {1:.2f}% last_matches# {2} max interval: {3}\n'.format(key,
+                                                                                              correct_score[key]['prob'],
+                                                                                              correct_score[key]['#_of_fixt_since_last'],
+                                                                                              correct_score[key]['max_interval']))
 output_file.close()
