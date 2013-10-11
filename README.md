@@ -13,6 +13,7 @@ Requirements
     Python 2.7.5 or Python 3.3
     BeautifulSoup4
     Lxml
+    Internet connection - the statitics are gathered using 'web scraping' tehnique
 
 Usage
 
