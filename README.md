@@ -9,17 +9,20 @@ About BetBot
       The player chooses a bet, and places bet on it until he wins. (advanced gamblers should know better)
 
 Requirements
+
     Python 2.7.5 or Python 3.3
     BeautifulSoup4
     Lxml
 
 Usage
+
     Double-click main.py and wait until it finishes. Open the 'bets' file that was created and you are done.
     Or run the project in console:
       ex: Linux
         ./main.py
       
 Future
+
     More leagues will be added.
     Speed will be improved (by storing statitics locally and update it with the last results).
   
