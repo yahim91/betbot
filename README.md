@@ -6,7 +6,8 @@ About BetBot
     Betbot is a program designed for soccer gamblers. It provides information and probabilites of next 
     fixtures based on statistics gathered from the last 3 years and has a winning rate > 60%.
     Note that this is project is still in development.
-    The gambler should use a tracking tehnique. The player chooses a bet, and places bet on it until he wins.
+    The gambler should use a tracking tehnique. The player chooses a bet, and places bet on it until
+    he wins.
     (advanced gamblers should know better)
 
 Requirements
