@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import urllib
 import urllib2
+import time
 import sys
 from bs4 import BeautifulSoup
 from lxml import etree
@@ -619,7 +620,12 @@ def compute_for_country(country, value):
             tree = etree.ElementTree(root)
             raw_fixtures = root.findall(".//n[@c='couch_fixtures']/c")[0].text
             fixtures = BeautifulSoup(raw_fixtures)
-            for result in fixtures.find_all("td", attrs = {'class': 'nt ftx '}):
+            #sort fixtures by date
+            events = sorted(fixtures.find_all("td", attrs = {'class': 'nt ftx '}),
+                            key = lambda x: time.strptime(x.find_previous_sibling('td', attrs={'class': 'datetime'}).text, '%d/%m/%y %H:%M'))
+            #print events[0].find_previous_sibling('td', attrs={'class': 'datetime'}).text
+            #return
+            for result in events:
                 if (result.text == 'Postponed' or result.text == ''):
                     continue
                 total_fixtures += 1
@@ -878,11 +884,13 @@ def compute_for_country(country, value):
                                                                                             correct_score[key]['max_interval']))
 
 def main(argv):
-    print argv
     create_query_strings()
     if (len(argv)):
         for country in argv:
-            compute_for_country(country, countries[country])
+            if (country not in countries):
+                print country + ' is not currently available!'
+            else:
+                compute_for_country(country, countries[country])
     else:
         for country, value in countries.items():
             compute_for_country(country, value)
