@@ -12,10 +12,267 @@ plimit = 80
 output_file = open('bets', 'w')
 countries = {'Romania':{}, 'Argentina':{}, 'Rusia':{}, 'Poland':{}, 'Portugal': {}, 'Latvia': {}, 'Lithuania': {}, 'Spain': {},
             'Chile': {}, 'Austria': {}, 'Italy': {}, 'Turkey': {}, 'Costa Rica': {}, 'Colombia': {}, 'USA': {}, 'U.A.E.': {},
-            'Switzerland': {}, 'Bulgaria': {}, 'Denmark': {}, 'Brasil': {}}
+             'Switzerland': {}, 'Bulgaria': {}, 'Denmark': {}, 'Brasil': {}, 'Sweden':{}, 'UK': {}, 'Germany': {}, 'Netherlands': {},
+             'Belgium': {}, 'Finland': {}, 'Norway': {}, 'Japan': {}}
 
 # compute query strings for data request
 def create_query_strings():
+
+    countries['Japan']['J.League'] = {'11': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_52,22_5,5_3227,9_fixtures,231_full,23_1",
+                                                    callback="ab997b1be4f08972b3efbcdb7cb9438dfe5a43ae"
+                                                )
+                                            ),
+                    '12': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_52,22_5,5_4290,9_fixtures,231_full,23_1",
+                                                    callback="5593a9c223eb6d70e2e5ac5d83835fb0a632f202"
+                                                )
+                                            ),
+                    '13': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_52,22_5,5_5916,9_fixtures,231_full,23_1",
+                                                    callback="42942e5c029484c183b9189cbd8ef7eeff6d9949"
+                                                )
+                                            )
+                    }
+    countries['Norway']['1st Divisjon'] = {'11': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_5,22_1,5_3189,9_fixtures,231_full,23_1",
+                                                    callback="37128821dd5ec05bde82e791d8ed553fff72afc4"
+                                                )
+                                            ),
+                    '12': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_5,22_1,5_4182,9_fixtures,231_full,23_1",
+                                                    callback="8cd7b688c42641f5aeb65249de3b1e825ef16b58"
+                                                )
+                                            ),
+                    '13': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_5,22_1,5_5764,9_fixtures,231_full,23_1",
+                                                    callback="41d0355904bdba4b3dcab0f9f0ef196ae0cd8ec4"
+                                                )
+                                            )
+                    }
+    countries['Finland']['Veikkausliiga'] = {'11': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_19,22_1,5_3226,9_fixtures,231_full,23_1",
+                                                    callback="2efcd8c04bd7ee8f3ceea396ccb95714f425eab4"
+                                                )
+                                            ),
+                    '12': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_19,22_1,5_4294,9_fixtures,231_full,23_1",
+                                                    callback="9ee37d901f3b41a373a86785e795cd27c7cd86bf"
+                                                )
+                                            ),
+                    '13/14': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_19,22_1,5_5906,9_fixtures,231_full,23_1",
+                                                    callback="25672de7b8a55e5b76cb86ccafe3e4a3747770ce"
+                                                )
+                                            )
+                    }
+
+    countries['Belgium']['Pro League'] = {'11/12': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_33,22_1,5_3414,9_fixtures,231_full,23_1",
+                                                    callback="610f4fd5ee04d9987b8306cf7af5f3f076b2f91d"
+                                                )
+                                            ),
+                    '12/13': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_33,22_1,5_4676,9_fixtures,231_full,23_1",
+                                                    callback="610d715265c5febe66cf20ca9af7709dc9f1833c"
+                                                )
+                                            ),
+                    '13/14': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_33,22_1,5_6241,9_fixtures,231_full,23_1",
+                                                    callback="614cfe01f820541bd5dcada1195956898592e7d3"
+                                                )
+                                            )
+                    }
+    countries['Netherlands']['Eredivisie'] = {'11/12': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_35,22_1,5_3432,9_fixtures,231_full,23_1",
+                                                    callback="769ccedfac553c9c3f28b8d37884e16af3c67099"
+                                                )
+                                            ),
+                    '12/13': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_35,22_1,5_4746,9_fixtures,231_full,23_1",
+                                                    callback="2e76ef082b3a229cc9b54b543766d3193e8948b2"
+                                                )
+                                            ),
+                    '13/14': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_35,22_1,5_6267,9_fixtures,231_full,23_1",
+                                                    callback="fb7e2a20777a3439d5f7ef0e057d16e47dcff1bd"
+                                                )
+                                            )
+                    }
+    countries['Netherlands']['Eerste Divisie'] = {'11/12': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_35,22_1,5_3433,9_fixtures,231_full,23_1",
+                                                    callback="5c0aaf3dfea1826bc5b47fbe561d3adbefa85fcf"
+                                                )
+                                            ),
+                    '12/13': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_35,22_1,5_4748,9_fixtures,231_full,23_1",
+                                                    callback="164665f5bf6a1b1d52d638051c0652f90fa6000f"
+                                                )
+                                            ),
+                    '13/14': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_35,22_1,5_6269,9_fixtures,231_full,23_1",
+                                                    callback="e8a2e0105903476755c866a737d2b9ac0b2ec4cd"
+                                                )
+                                            )
+                    }
+    countries['Germany']['Bundesliga'] = {'11/12': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_30,22_1,5_3405,9_fixtures,231_full,23_1",
+                                                    callback="a2c23068a13c2f8950aeed7a56d588f34fc99d2f"
+                                                )
+                                            ),
+                    '12/13': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_30,22_1,5_4792,9_fixtures,231_full,23_1",
+                                                    callback="d4793c90689764bace762adc2b0e1456001f0a70"
+                                                )
+                                            ),
+                    '13/14': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_30,22_1,5_6303,9_fixtures,231_full,23_1",
+                                                    callback="e79969ecad79e8f04b58015cf650a44d9fd13fd1"
+                                                )
+                                            )
+                    }
+
+    countries['UK']['Premier League'] = {'11/12': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_1,22_1,5_3391,9_fixtures,231_full,23_1",
+                                                    callback="b6850774fb3a0fd192fe3c0fca822016a8eba430"
+                                                )
+                                            ),
+                    '12/13': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_1,22_1,5_4710,9_fixtures,231_full,23_1",
+                                                    callback="7a4d5396202b509186b41bc612fe16cdb4be632a"
+                                                )
+                                            ),
+                    '13/14': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_1,22_1,5_6311,9_fixtures,231_full,23_1",
+                                                    callback="002d0e7d0c465eef4d7fff885c4419d6d2572dd5"
+                                                )
+                                            )
+                    }
+
+    countries['Sweden']['Superettan'] = {'11': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_9,22_1,5_3196,9_fixtures,231_full,23_1",
+                                                    callback="1f8ecdbf20548a1f1b63524ebb54d7c816eaf0de"
+                                                )
+                                            ),
+                    '12': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_9,22_1,5_4170,9_fixtures,231_full,23_1",
+                                                    callback="df715e1a135fa50be9568f19e7d7e9262008718f"
+                                                )
+                                            ),
+                    '13': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_9,22_1,5_5774,9_fixtures,231_full,23_1",
+                                                    callback="2f71013ee654b61ca6761ef7539c8459e5971bfb"
+                                                )
+                                            )
+                    }
+
+    countries['Sweden']['Allsvenskan'] = {'11': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_9,22_1,5_3174,9_fixtures,231_full,23_1",
+                                                    callback="4d625e945d0382021a054046404d2421bd217850"
+                                                )
+                                            ),
+                    '12': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_9,22_1,5_4164,9_fixtures,231_full,23_1",
+                                                    callback="2aa4f5dcbb59f72a5248f68295d697d2daed379e"
+                                                )
+                                            ),
+                    '13': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_9,22_1,5_5762,9_fixtures,231_full,23_1",
+                                                    callback="de7e8b08071f74ff08e79260e5e66c758a210b52"
+                                                )
+                                            )
+                    }
+
     countries['Brasil']['Brasilero Serie B'] = {'11': urllib.urlencode(dict (html=1,
                                                     id=1827,
                                                     language="en",
