@@ -13,11 +13,86 @@ output_file = open('bets', 'w')
 countries = {'Romania':{}, 'Argentina':{}, 'Rusia':{}, 'Poland':{}, 'Portugal': {}, 'Latvia': {}, 'Lithuania': {}, 'Spain': {},
             'Chile': {}, 'Austria': {}, 'Italy': {}, 'Turkey': {}, 'Costa Rica': {}, 'Colombia': {}, 'USA': {}, 'U.A.E.': {},
              'Switzerland': {}, 'Bulgaria': {}, 'Denmark': {}, 'Brasil': {}, 'Sweden':{}, 'UK': {}, 'Germany': {}, 'Netherlands': {},
-             'Belgium': {}, 'Finland': {}, 'Norway': {}, 'Japan': {}}
+             'Belgium': {}, 'Finland': {}, 'Norway': {}, 'Japan': {}, 'Czech Republic': {}, 'France': {}, 'Croatia': {}}
 
 # compute query strings for data request
 def create_query_strings():
 
+    countries['Croatia']['1.HNL'] = {'11/12': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_14,22_1,5_3409,9_fixtures,231_full,23_1",
+                                                    callback="912375afa2030dfd9e7ff24637e2e1208115cd17"
+                                                )
+                                            ),
+                    '12/13': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_14,22_1,5_4614,9_fixtures,231_full,23_1",
+                                                    callback="09234e620b16f0403773ff12c61ffc2b8f0effca"
+                                                )
+                                            ),
+                    '13/14': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_14,22_1,5_6281,9_fixtures,231_full,23_1",
+                                                    callback="1cb706a203bed09e9a8770b194c95c24713131d4"
+                                                )
+                                            )
+                    }
+    countries['France']['Ligue 1'] = {'11/12': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_7,22_1,5_3380,9_fixtures,231_full,23_1",
+                                                    callback="a73810fd99eaf3bb6fae4378f556c9447cdfd242"
+                                                )
+                                            ),
+                    '12/13': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_7,22_1,5_4616,9_fixtures,231_full,23_1",
+                                                    callback="3930632c2c2717efd4cc0585ebe8aca10429f65e"
+                                                )
+                                            ),
+                    '13/14': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_7,22_1,5_6271,9_fixtures,231_full,23_1",
+                                                    callback="5da6b3c46784160140ad9de294b125852e3de358"
+                                                )
+                                            )
+                    }
+    countries['Czech Republic']['1.Liga'] = {'11/12': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_18,22_1,5_3446,9_fixtures,231_full,23_1",
+                                                    callback="434f4fc0fb3d52d743274922c5019f56b560073d"
+                                                )
+                                            ),
+                    '12/13': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_18,22_1,5_4929,9_fixtures,231_full,23_1",
+                                                    callback="da99013577a03b89b1a8584bd2fcb530e1943209"
+                                                )
+                                            ),
+                    '13/14': urllib.urlencode(dict (html=1,
+                                                    id=1827,
+                                                    language="en",
+                                                    clientid=4,
+                                                    state="2_1,3_18,22_1,5_6383,9_fixtures,231_full,23_1",
+                                                    callback="ffbd0d1ef3394b767204afa1118c7d6731f52eb7"
+                                                )
+                                            )
+                    }
     countries['Japan']['J.League'] = {'11': urllib.urlencode(dict (html=1,
                                                     id=1827,
                                                     language="en",
@@ -870,7 +945,7 @@ def compute_for_country(country, value):
 
         correct_score = {}
         total_fixtures = 0
-        for year, query in OrderedDict(sorted(queries.items(), key=lambda t: t[0])).items():
+        for year, query in OrderedDict(sorted(queries.items(), key=lambda t: t[0])).items()[1:]:
             data = urllib2.urlopen(url + query)
             print 'Gathered data for ' + year
             root = etree.XML(data.read())
